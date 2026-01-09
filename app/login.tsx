@@ -42,7 +42,7 @@ export default function LoginScreen() {
         />
 
         <Text style={styles.title}>SDBA</Text>
-        <Text style={styles.subtitle}>Stay Data Breach Alert</Text>
+        <Text style={styles.subtitle}>Stagic Data Breach Alert</Text>
         <Text style={styles.description}>
           Monitor your email addresses for data breaches and get instant alerts when your information is compromised.
         </Text>
