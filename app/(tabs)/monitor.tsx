@@ -12,12 +12,8 @@ import {
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Plus, Trash2, Bell, Clock, AlertCircle } from 'lucide-react-native';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.EXPO_PUBLIC_SUPABASE_URL!,
-  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface MonitoredEmail {
   id: string;
@@ -38,6 +34,7 @@ interface BreachRecord {
 }
 
 export default function MonitorScreen() {
+  const { user } = useAuth();
   const [monitoredEmails, setMonitoredEmails] = useState<MonitoredEmail[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -106,6 +103,7 @@ export default function MonitorScreen() {
           {
             email: newEmail.trim(),
             scan_interval: scanInterval,
+            user_id: user?.id,
           },
         ])
         .select()

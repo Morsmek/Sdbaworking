@@ -10,12 +10,7 @@ import {
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { AlertTriangle, CheckCircle, Trash2, Eye } from 'lucide-react-native';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.EXPO_PUBLIC_SUPABASE_URL!,
-  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase } from '@/lib/supabase';
 
 interface BreachAlert {
   id: string;

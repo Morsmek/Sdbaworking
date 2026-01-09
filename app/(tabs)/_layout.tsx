@@ -1,7 +1,22 @@
-import { Tabs } from 'expo-router';
-import { ShieldAlert, Bell, Clock } from 'lucide-react-native';
+import { Tabs, useRouter } from 'expo-router';
+import { ShieldAlert, Bell, Clock, User } from 'lucide-react-native';
+import { useAuth } from '@/contexts/AuthContext';
+import { useEffect } from 'react';
 
 export default function TabLayout() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace('/login');
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    return null;
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -38,6 +53,15 @@ export default function TabLayout() {
           title: 'Alerts',
           tabBarIcon: ({ size, color }) => (
             <Bell size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ size, color }) => (
+            <User size={size} color={color} />
           ),
         }}
       />
